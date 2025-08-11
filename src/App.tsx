@@ -12,26 +12,30 @@ import Search from "./pages/Search/Search";
 import Details from "./pages/Details/Details";
 import Cart from "./pages/Cart/Cart";
 import Profile from "./pages/Profile/Profile";
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
 export const routelink: any = createBrowserHistory();
 function App() {
   return (
     <>
-      <HistoryRouter history={routelink}>
-        <Routes>
-          <Route path="/" element={<HomeTemplate />}>
-            <Route index element={<Home />} />
-            <Route path="login" element={<Login />} />
-            <Route path="register" element={<Register />} />
-            <Route path="search" element={<Search />} />
-            <Route path="details">
-              <Route path=":id" element={<Details />} />
+      <Provider store={store}>
+        <HistoryRouter history={routelink}>
+          <Routes>
+            <Route path="/" element={<HomeTemplate />}>
+              <Route index element={<Home />} />
+              <Route path="login" element={<Login />} />
+              <Route path="register" element={<Register />} />
+              <Route path="search" element={<Search />} />
+              <Route path="details">
+                <Route path=":id" element={<Details />} />
+              </Route>
+              <Route path="cart" element={<Cart />} />
+              <Route path="profile" element={<Profile />} />
+              <Route path="*" element={<Navigate to="/" />} />
             </Route>
-            <Route path="cart" element={<Cart />} />
-            <Route path="profile" element={<Profile />} />
-            <Route path="*" element={<Navigate to="/" />} />
-          </Route>
-        </Routes>
-      </HistoryRouter>
+          </Routes>
+        </HistoryRouter>
+      </Provider>
     </>
   );
 }
