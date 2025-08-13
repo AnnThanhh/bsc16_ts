@@ -13,7 +13,7 @@ export interface ProductType {
   relatedProducts: string;
   feature: boolean;
   image: string;
-  imgLink: string;
+  imgLink: string | null;
 }
 
 export interface ProductDetailType {

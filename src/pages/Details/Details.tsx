@@ -3,7 +3,11 @@ import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import type { RootState, DispatchType } from "../../redux/store";
 import { getProductDetail } from "../../redux/reducers/productReducer";
-import type { Category } from "../../assets/models/ProductModel";
+import type {
+  Category,
+  RelatedProduct,
+} from "../../assets/models/ProductModel";
+import ProductCardComponent from "../../components/ProductCardComponent";
 type Props = {};
 
 const Details = (props: Props) => {
@@ -47,7 +51,9 @@ const Details = (props: Props) => {
                 </h1>
                 <p className="text-sm text-gray-500">{prodDetail?.alias}</p>
               </div>
-              <div className="text-lg md:text-xl font-bold">{prodDetail?.price}</div>
+              <div className="text-lg md:text-xl font-bold">
+                {prodDetail?.price}
+              </div>
             </div>
 
             <div className="mt-3 flex flex-wrap gap-2">
@@ -63,7 +69,7 @@ const Details = (props: Props) => {
             </div>
 
             <p className="mt-4 text-sm text-gray-700 leading-relaxed">
-                {prodDetail?.shortDescription}
+              {prodDetail?.shortDescription}
             </p>
 
             <div className="mt-5">
@@ -111,6 +117,15 @@ const Details = (props: Props) => {
                 {prodDetail?.description}
               </p>
             </details>
+
+            <div className="mt-6">
+              <h3 className="text-xl font-semibold">Related products</h3>
+              {prodDetail?.relatedProducts.map(
+                (item: RelatedProduct, index: number) => {
+                  return <ProductCardComponent item={item}  key={index}/>;
+                }
+              )}
+            </div>
           </div>
         </div>
       </div>
